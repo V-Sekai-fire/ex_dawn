@@ -16,6 +16,8 @@ defmodule ExDawn.ObjRenderer do
   @doc """
   Loads an OBJ model for rendering.
 
+  TODO: [2025-01-15] fire - Parse OBJ file (or reuse aria_gltf processing), parse MTL file if present, convert OBJ geometry to WebGPU buffers, and load textures from MTL materials
+
   ## Parameters
 
   - `device`: The WebGPU device
@@ -23,7 +25,7 @@ defmodule ExDawn.ObjRenderer do
 
   ## Examples
 
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> {:ok, model} = ExDawn.ObjRenderer.load(device, "model.obj")
       iex> is_map(model)
       true
@@ -31,15 +33,13 @@ defmodule ExDawn.ObjRenderer do
   """
   @spec load(device(), String.t()) :: {:ok, map()} | {:error, term()}
   def load(device, path) when is_binary(path) do
-    # TODO: Parse OBJ file (or reuse aria_gltf processing)
-    # TODO: Parse MTL file if present
-    # TODO: Convert OBJ geometry to WebGPU buffers
-    # TODO: Load textures from MTL materials
     {:ok, %{meshes: [], textures: [], materials: []}}
   end
 
   @doc """
   Renders a loaded OBJ model.
+
+  TODO: [2025-01-15] fire - Begin render pass, draw OBJ meshes with materials, and end render pass
 
   ## Parameters
 
@@ -59,14 +59,13 @@ defmodule ExDawn.ObjRenderer do
   """
   @spec render(device(), map(), Matrix4.t(), Matrix4.t()) :: :ok | {:error, term()}
   def render(device, model, view_matrix, proj_matrix) do
-    # TODO: Begin render pass
-    # TODO: Draw OBJ meshes with materials
-    # TODO: End render pass
     :ok
   end
 
   @doc """
   Converts OBJ geometry to WebGPU vertex and index buffers.
+
+  TODO: [2025-01-15] fire - Interleave vertex data (position, normal, texcoord), create vertex buffer, and create index buffer
 
   ## Parameters
 
@@ -94,10 +93,6 @@ defmodule ExDawn.ObjRenderer do
           [non_neg_integer()]
         ) :: {:ok, map()} | {:error, term()}
   def geometry_to_buffers(device, vertices, normals, texcoords, indices) do
-    # TODO: Interleave vertex data (position, normal, texcoord)
-    # TODO: Create vertex buffer
-    # TODO: Create index buffer
     {:ok, %{vertex_buffer: nil, index_buffer: nil}}
   end
 end
-

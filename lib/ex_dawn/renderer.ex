@@ -19,6 +19,8 @@ defmodule ExDawn.Renderer do
   @doc """
   Begins a render pass.
 
+  TODO: [2025-01-15] fire - Implement render pass begin with Native NIF
+
   ## Parameters
 
   - `device`: The WebGPU device
@@ -29,7 +31,7 @@ defmodule ExDawn.Renderer do
 
   ## Examples
 
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> {:ok, pass} = ExDawn.Renderer.begin_render_pass(device, viewport: {0, 0, 800, 600})
       iex> is_reference(pass)
       true
@@ -37,12 +39,13 @@ defmodule ExDawn.Renderer do
   """
   @spec begin_render_pass(device(), keyword()) :: {:ok, reference()} | {:error, term()}
   def begin_render_pass(device, opts \\ []) do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 
   @doc """
   Draws indexed primitives.
+
+  TODO: [2025-01-15] fire - Implement indexed draw call with Native NIF
 
   ## Parameters
 
@@ -66,12 +69,13 @@ defmodule ExDawn.Renderer do
           :ok | {:error, term()}
   def draw_indexed(pass, pipeline, vertex_buffer, index_buffer, index_count)
       when is_integer(index_count) and index_count > 0 do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 
   @doc """
   Draws non-indexed primitives.
+
+  TODO: [2025-01-15] fire - Implement non-indexed draw call with Native NIF
 
   ## Parameters
 
@@ -92,12 +96,13 @@ defmodule ExDawn.Renderer do
   @spec draw(reference(), pipeline(), buffer(), non_neg_integer()) :: :ok | {:error, term()}
   def draw(pass, pipeline, vertex_buffer, vertex_count)
       when is_integer(vertex_count) and vertex_count > 0 do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 
   @doc """
   Ends a render pass and submits it to the GPU.
+
+  TODO: [2025-01-15] fire - Implement render pass end and command submission with Native NIF
 
   ## Examples
 
@@ -109,12 +114,13 @@ defmodule ExDawn.Renderer do
   """
   @spec end_render_pass(reference()) :: :ok | {:error, term()}
   def end_render_pass(pass) do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 
   @doc """
   Creates a view matrix from camera parameters.
+
+  TODO: [2025-01-15] fire - Implement look-at matrix calculation using aria_math Matrix4
 
   Uses aria_math Matrix4 for transformations.
 
@@ -126,9 +132,10 @@ defmodule ExDawn.Renderer do
 
   ## Examples
 
-      iex> eye = AriaMath.Vector3.new(0.0, 0.0, 5.0)
-      iex> target = AriaMath.Vector3.new(0.0, 0.0, 0.0)
-      iex> up = AriaMath.Vector3.new(0.0, 1.0, 0.0)
+      iex> alias AriaMath.Vector3
+      iex> eye = Vector3.new(0.0, 0.0, 5.0)
+      iex> target = Vector3.new(0.0, 0.0, 0.0)
+      iex> up = Vector3.new(0.0, 1.0, 0.0)
       iex> view = ExDawn.Renderer.look_at(eye, target, up)
       iex> %AriaMath.Matrix4{} = view
       %AriaMath.Matrix4{}
@@ -136,12 +143,13 @@ defmodule ExDawn.Renderer do
   """
   @spec look_at(Vector3.t(), Vector3.t(), Vector3.t()) :: Matrix4.t()
   def look_at(eye, target, up) do
-    # TODO: Use aria_math Matrix4 for look-at calculation
     Matrix4.identity()
   end
 
   @doc """
   Creates a perspective projection matrix.
+
+  TODO: [2025-01-15] fire - Implement perspective projection matrix calculation using aria_math Matrix4
 
   Uses aria_math Matrix4 for transformations.
 
@@ -162,8 +170,6 @@ defmodule ExDawn.Renderer do
   @spec perspective(float(), float(), float(), float()) :: Matrix4.t()
   def perspective(fov, aspect, near, far)
       when is_float(fov) and is_float(aspect) and is_float(near) and is_float(far) do
-    # TODO: Use aria_math Matrix4 for perspective projection
     Matrix4.identity()
   end
 end
-

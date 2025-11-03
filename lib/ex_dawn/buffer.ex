@@ -26,7 +26,7 @@ defmodule ExDawn.Buffer do
 
   ## Examples
 
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> {:ok, buffer} = ExDawn.Buffer.create_buffer(device, 1024, [:vertex, :copy_dst])
       iex> is_reference(buffer)
       true
@@ -51,7 +51,7 @@ defmodule ExDawn.Buffer do
 
   ## Examples
 
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> {:ok, buffer} = ExDawn.Buffer.create_buffer(device, 1024)
       iex> ExDawn.Buffer.write_buffer(device, buffer, <<1, 2, 3, 4>>)
       :ok
@@ -62,4 +62,3 @@ defmodule ExDawn.Buffer do
     Native.write_buffer(device, buffer, data)
   end
 end
-

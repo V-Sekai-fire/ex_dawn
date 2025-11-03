@@ -46,9 +46,7 @@ Note: Dawn needs to be built separately and linked in the Makefile before compil
 ```elixir
 alias ExDawn.Device
 
-{:ok, instance} = Device.create_instance()
-{:ok, adapter} = Device.create_adapter(instance)
-{:ok, device} = Device.create_device(adapter)
+{:ok, device} = Device.create()
 ```
 
 ### Creating Buffers
@@ -65,16 +63,17 @@ alias ExDawn.Buffer
 ```elixir
 alias ExDawn.{Device, GltfRenderer, Renderer}
 alias AriaGltf.Import
+alias AriaMath.Vector3
 
 # Load GLTF model
 {:ok, document} = Import.from_file("model.gltf")
-{:ok, device} = Device.create_instance() |> Device.create_adapter() |> Device.create_device()
+{:ok, device} = Device.create()
 {:ok, model} = GltfRenderer.load(device, document)
 
 # Set up camera
-eye = AriaMath.Vector3.new(0.0, 0.0, 5.0)
-target = AriaMath.Vector3.new(0.0, 0.0, 0.0)
-up = AriaMath.Vector3.new(0.0, 1.0, 0.0)
+eye = Vector3.new(0.0, 0.0, 5.0)
+target = Vector3.new(0.0, 0.0, 0.0)
+up = Vector3.new(0.0, 1.0, 0.0)
 view = Renderer.look_at(eye, target, up)
 proj = Renderer.perspective(:math.pi() / 4, 16.0 / 9.0, 0.1, 100.0)
 

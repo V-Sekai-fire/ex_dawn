@@ -36,4 +36,3 @@ defmodule ExDawn.MixProject do
     ]
   end
 end
-

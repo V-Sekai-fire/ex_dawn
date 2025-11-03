@@ -8,7 +8,7 @@
 #include <map>
 #include <memory>
 
-// TODO: Include Dawn WebGPU headers when available
+// TODO: [2025-01-15] fire - Include Dawn WebGPU headers when available
 // #include "webgpu.h"
 // #include "webgpu_cpp.h"
 
@@ -77,37 +77,37 @@ static ERL_NIF_TERM make_binary_string(ErlNifEnv* env, const char* str, size_t l
 // Resource destructors
 static void dawn_instance_dtor(ErlNifEnv* env, void* obj) {
     DawnInstance* instance = (DawnInstance*)obj;
-    // TODO: Release WGPUInstance when Dawn is integrated
+    // TODO: [2025-01-15] fire - Release WGPUInstance when Dawn is integrated
     // wgpuInstanceRelease(instance->instance);
 }
 
 static void dawn_adapter_dtor(ErlNifEnv* env, void* obj) {
     DawnAdapter* adapter = (DawnAdapter*)obj;
-    // TODO: Release WGPUAdapter when Dawn is integrated
+    // TODO: [2025-01-15] fire - Release WGPUAdapter when Dawn is integrated
     // wgpuAdapterRelease(adapter->adapter);
 }
 
 static void dawn_device_dtor(ErlNifEnv* env, void* obj) {
     DawnDevice* device = (DawnDevice*)obj;
-    // TODO: Release WGPUDevice when Dawn is integrated
+    // TODO: [2025-01-15] fire - Release WGPUDevice when Dawn is integrated
     // wgpuDeviceRelease(device->device);
 }
 
 static void dawn_buffer_dtor(ErlNifEnv* env, void* obj) {
     DawnBuffer* buffer = (DawnBuffer*)obj;
-    // TODO: Release WGPUBuffer when Dawn is integrated
+    // TODO: [2025-01-15] fire - Release WGPUBuffer when Dawn is integrated
     // wgpuBufferRelease(buffer->buffer);
 }
 
 static void dawn_texture_dtor(ErlNifEnv* env, void* obj) {
     DawnTexture* texture = (DawnTexture*)obj;
-    // TODO: Release WGPUTexture when Dawn is integrated
+    // TODO: [2025-01-15] fire - Release WGPUTexture when Dawn is integrated
     // wgpuTextureRelease(texture->texture);
 }
 
 // NIF: create_instance/0
 static ERL_NIF_TERM nif_create_instance(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
-    // TODO: Implement with Dawn
+    // TODO: [2025-01-15] fire - Implement with Dawn wgpuCreateInstance API call
     // WGPUInstanceDescriptor desc = {};
     // WGPUInstance instance = wgpuCreateInstance(&desc);
     
@@ -116,7 +116,7 @@ static ERL_NIF_TERM nif_create_instance(ErlNifEnv* env, int argc, const ERL_NIF_
         return enif_make_atom(env, "error");
     }
     
-    // TODO: Set instance->instance = instance when Dawn is integrated
+    // TODO: [2025-01-15] fire - Set instance->instance = instance when Dawn is integrated
     instance->instance = nullptr;
     
     ERL_NIF_TERM resource_term = enif_make_resource(env, instance);
@@ -127,14 +127,14 @@ static ERL_NIF_TERM nif_create_instance(ErlNifEnv* env, int argc, const ERL_NIF_
 
 // NIF: create_adapter/1
 static ERL_NIF_TERM nif_create_adapter(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
-    // TODO: Implement with Dawn
+    // TODO: [2025-01-15] fire - Implement with Dawn wgpuInstanceRequestAdapter API call
     // Extract instance from argv[0]
     DawnInstance* instance = nullptr;
     if (!enif_get_resource(env, argv[0], DAWN_INSTANCE_RESOURCE, (void**)&instance)) {
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "invalid_instance"));
     }
     
-    // TODO: Request adapter from instance
+    // TODO: [2025-01-15] fire - Request adapter from instance using wgpuInstanceRequestAdapter
     // WGPURequestAdapterOptions options = {};
     // WGPUAdapter adapter = wgpuInstanceRequestAdapter(instance->instance, &options);
     
@@ -143,7 +143,8 @@ static ERL_NIF_TERM nif_create_adapter(ErlNifEnv* env, int argc, const ERL_NIF_T
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "alloc_failed"));
     }
     
-    adapter->adapter = nullptr; // TODO: Set when Dawn is integrated
+    // TODO: [2025-01-15] fire - Set adapter->adapter when Dawn is integrated
+    adapter->adapter = nullptr;
     
     ERL_NIF_TERM resource_term = enif_make_resource(env, adapter);
     enif_release_resource(adapter);
@@ -153,13 +154,13 @@ static ERL_NIF_TERM nif_create_adapter(ErlNifEnv* env, int argc, const ERL_NIF_T
 
 // NIF: create_device/1
 static ERL_NIF_TERM nif_create_device(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
-    // TODO: Implement with Dawn
+    // TODO: [2025-01-15] fire - Implement with Dawn wgpuAdapterRequestDevice API call
     DawnAdapter* adapter = nullptr;
     if (!enif_get_resource(env, argv[0], DAWN_ADAPTER_RESOURCE, (void**)&adapter)) {
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "invalid_adapter"));
     }
     
-    // TODO: Request device from adapter
+    // TODO: [2025-01-15] fire - Request device from adapter using wgpuAdapterRequestDevice
     // WGPUDeviceDescriptor desc = {};
     // WGPUDevice device = wgpuAdapterRequestDevice(adapter->adapter, &desc);
     
@@ -168,7 +169,8 @@ static ERL_NIF_TERM nif_create_device(ErlNifEnv* env, int argc, const ERL_NIF_TE
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "alloc_failed"));
     }
     
-    device->device = nullptr; // TODO: Set when Dawn is integrated
+    // TODO: [2025-01-15] fire - Set device->device when Dawn is integrated
+    device->device = nullptr;
     
     ERL_NIF_TERM resource_term = enif_make_resource(env, device);
     enif_release_resource(device);
@@ -178,7 +180,7 @@ static ERL_NIF_TERM nif_create_device(ErlNifEnv* env, int argc, const ERL_NIF_TE
 
 // NIF: create_buffer/3
 static ERL_NIF_TERM nif_create_buffer(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
-    // TODO: Implement with Dawn
+    // TODO: [2025-01-15] fire - Implement with Dawn wgpuDeviceCreateBuffer API call
     DawnDevice* device = nullptr;
     if (!enif_get_resource(env, argv[0], DAWN_DEVICE_RESOURCE, (void**)&device)) {
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "invalid_device"));
@@ -189,10 +191,10 @@ static ERL_NIF_TERM nif_create_buffer(ErlNifEnv* env, int argc, const ERL_NIF_TE
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "invalid_size"));
     }
     
-    // TODO: Extract usage flags from argv[2] (list of atoms)
+    // TODO: [2025-01-15] fire - Extract usage flags from argv[2] (list of atoms) and convert to WGPUBufferUsageFlags
     // WGPUBufferUsageFlags usage = WGPUBufferUsage_Vertex | WGPUBufferUsage_Index;
     
-    // TODO: Create buffer
+    // TODO: [2025-01-15] fire - Create buffer using wgpuDeviceCreateBuffer
     // WGPUBufferDescriptor desc = {};
     // desc.size = size;
     // desc.usage = usage;
@@ -203,7 +205,8 @@ static ERL_NIF_TERM nif_create_buffer(ErlNifEnv* env, int argc, const ERL_NIF_TE
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "alloc_failed"));
     }
     
-    buffer->buffer = nullptr; // TODO: Set when Dawn is integrated
+    // TODO: [2025-01-15] fire - Set buffer->buffer when Dawn is integrated
+    buffer->buffer = nullptr;
     buffer->size = size;
     
     ERL_NIF_TERM resource_term = enif_make_resource(env, buffer);
@@ -214,7 +217,7 @@ static ERL_NIF_TERM nif_create_buffer(ErlNifEnv* env, int argc, const ERL_NIF_TE
 
 // NIF: write_buffer/2
 static ERL_NIF_TERM nif_write_buffer(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
-    // TODO: Implement with Dawn
+    // TODO: [2025-01-15] fire - Implement with Dawn wgpuQueueWriteBuffer API call
     DawnDevice* device = nullptr;
     if (!enif_get_resource(env, argv[0], DAWN_DEVICE_RESOURCE, (void**)&device)) {
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "invalid_device"));
@@ -225,7 +228,7 @@ static ERL_NIF_TERM nif_write_buffer(ErlNifEnv* env, int argc, const ERL_NIF_TER
         return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "invalid_buffer"));
     }
     
-    // TODO: Extract binary data from argv[2] and write to buffer
+    // TODO: [2025-01-15] fire - Extract binary data from argv[2] and write to buffer using wgpuQueueWriteBuffer
     // ErlNifBinary bin;
     // if (!enif_inspect_binary(env, argv[2], &bin)) {
     //     return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, "invalid_data"));

@@ -18,6 +18,8 @@ defmodule ExDawn.GltfRenderer do
   @doc """
   Loads a GLTF model for rendering.
 
+  TODO: [2025-01-15] fire - Convert GLTF meshes to WebGPU buffers, load textures from GLTF images, and create materials and pipelines
+
   ## Parameters
 
   - `device`: The WebGPU device
@@ -25,7 +27,7 @@ defmodule ExDawn.GltfRenderer do
 
   ## Examples
 
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> {:ok, document} = AriaGltf.Import.from_file("model.gltf")
       iex> {:ok, model} = ExDawn.GltfRenderer.load(device, document)
       iex> is_map(model)
@@ -34,14 +36,13 @@ defmodule ExDawn.GltfRenderer do
   """
   @spec load(device(), Document.t()) :: {:ok, map()} | {:error, term()}
   def load(device, %Document{} = document) do
-    # TODO: Convert GLTF meshes to WebGPU buffers
-    # TODO: Load textures from GLTF images
-    # TODO: Create materials and pipelines
     {:ok, %{meshes: [], textures: [], materials: []}}
   end
 
   @doc """
   Renders a loaded GLTF model.
+
+  TODO: [2025-01-15] fire - Begin render pass, traverse scene graph with node transforms, draw each mesh primitive with proper materials, and end render pass
 
   ## Parameters
 
@@ -61,15 +62,13 @@ defmodule ExDawn.GltfRenderer do
   """
   @spec render(device(), map(), Matrix4.t(), Matrix4.t()) :: :ok | {:error, term()}
   def render(device, model, view_matrix, proj_matrix) do
-    # TODO: Begin render pass
-    # TODO: Traverse scene graph with node transforms
-    # TODO: Draw each mesh primitive with proper materials
-    # TODO: End render pass
     :ok
   end
 
   @doc """
   Converts a GLTF mesh to WebGPU vertex and index buffers.
+
+  TODO: [2025-01-15] fire - Extract vertex attributes and indices from GLTF accessors and create vertex and index buffers
 
   ## Parameters
 
@@ -87,14 +86,13 @@ defmodule ExDawn.GltfRenderer do
   """
   @spec mesh_to_buffers(device(), Mesh.t()) :: {:ok, map()} | {:error, term()}
   def mesh_to_buffers(device, %Mesh{} = mesh) do
-    # TODO: Extract vertex attributes from GLTF accessors
-    # TODO: Extract indices from GLTF accessors
-    # TODO: Create vertex and index buffers
     {:ok, %{vertex_buffers: [], index_buffers: []}}
   end
 
   @doc """
   Sets up materials from GLTF for rendering.
+
+  TODO: [2025-01-15] fire - Load textures for PBR material, create render pipeline with PBR shader, and set up uniform buffers for material properties
 
   ## Parameters
 
@@ -113,10 +111,6 @@ defmodule ExDawn.GltfRenderer do
   @spec setup_material(device(), Document.t(), Material.t()) ::
           {:ok, Pipeline.pipeline()} | {:error, term()}
   def setup_material(device, %Document{} = document, %Material{} = material) do
-    # TODO: Load textures for PBR material
-    # TODO: Create render pipeline with PBR shader
-    # TODO: Set up uniform buffers for material properties
     {:error, :not_implemented}
   end
 end
-

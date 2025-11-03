@@ -26,4 +26,3 @@ defmodule ExDawn do
     def write_buffer(_device, _buffer, _data), do: :erlang.nif_error(:nif_not_loaded)
   end
 end
-

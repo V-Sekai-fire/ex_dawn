@@ -62,5 +62,23 @@ defmodule ExDawn.Device do
   def create_device(adapter) do
     Native.create_device(adapter)
   end
-end
 
+  @doc """
+  Helper function to create instance, adapter, and device in one call.
+
+  ## Examples
+
+      iex> {:ok, device} = ExDawn.Device.create()
+      iex> is_reference(device)
+      true
+
+  """
+  @spec create() :: {:ok, device()} | {:error, term()}
+  def create do
+    with {:ok, instance} <- create_instance(),
+         {:ok, adapter} <- create_adapter(instance),
+         {:ok, device} <- create_device(adapter) do
+      {:ok, device}
+    end
+  end
+end

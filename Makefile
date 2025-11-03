@@ -17,18 +17,18 @@ C_OBJECTS = $(BUILD_DIR)/dawn_nif.o
 # Compiler flags
 CXXFLAGS = -fPIC -std=c++17 -Wall -Wextra
 CXXFLAGS += -I$(ERL_EI_INCLUDE_DIR)
-# TODO: Add Dawn include paths once Dawn is set up
+# TODO: [2025-01-15] fire - Add Dawn include paths once Dawn is set up
 # CXXFLAGS += -I/path/to/dawn/include
 
 # Linker flags (use -bundle for macOS, -shared for Linux)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
     LDFLAGS = -bundle -undefined dynamic_lookup
-    # TODO: Link against Dawn libraries when available
+    # TODO: [2025-01-15] fire - Link against Dawn libraries when available
     # LDFLAGS += -L/path/to/dawn/lib -ldawn_native
 else
     LDFLAGS = -shared
-    # TODO: Link against Dawn libraries when available
+    # TODO: [2025-01-15] fire - Link against Dawn libraries when available
     # LDFLAGS += -L/path/to/dawn/lib -ldawn_native
 endif
 

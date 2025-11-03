@@ -17,6 +17,8 @@ defmodule ExDawn.Texture do
   @doc """
   Creates a texture from image data.
 
+  TODO: [2025-01-15] fire - Implement texture creation from image data with Native NIF
+
   ## Parameters
 
   - `device`: The WebGPU device
@@ -27,7 +29,7 @@ defmodule ExDawn.Texture do
 
   ## Examples
 
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> data = :binary.list_to_bin(List.duplicate([255, 0, 0, 255], 256))
       iex> {:ok, texture} = ExDawn.Texture.create_texture(device, 16, 16, :rgba8_unorm, data)
       iex> is_reference(texture)
@@ -38,12 +40,13 @@ defmodule ExDawn.Texture do
           {:ok, texture()} | {:error, term()}
   def create_texture(device, width, height, format, data)
       when is_integer(width) and is_integer(height) and is_binary(data) do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 
   @doc """
   Creates a texture view from a texture.
+
+  TODO: [2025-01-15] fire - Implement texture view creation with Native NIF
 
   ## Examples
 
@@ -55,12 +58,13 @@ defmodule ExDawn.Texture do
   """
   @spec create_texture_view(texture()) :: {:ok, reference()} | {:error, term()}
   def create_texture_view(texture) do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 
   @doc """
   Creates a texture from an aria_gltf Image structure.
+
+  TODO: [2025-01-15] fire - Load image data from GLTF Image and create texture
 
   ## Examples
 
@@ -72,8 +76,6 @@ defmodule ExDawn.Texture do
   """
   @spec from_gltf_image(device(), AriaGltf.Image.t()) :: {:ok, texture()} | {:error, term()}
   def from_gltf_image(device, %AriaGltf.Image{} = image) do
-    # TODO: Load image data from GLTF Image and create texture
     {:error, :not_implemented}
   end
 end
-

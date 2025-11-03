@@ -17,6 +17,8 @@ defmodule ExDawn.Pipeline do
   @doc """
   Creates a render pipeline.
 
+  TODO: [2025-01-15] fire - Implement render pipeline creation with WGSL shader compilation using Native NIF
+
   ## Parameters
 
   - `device`: The WebGPU device
@@ -29,7 +31,7 @@ defmodule ExDawn.Pipeline do
   ## Examples
 
       iex> shader = "@vertex fn vs() -> @builtin(position) vec4<f32> { return vec4<f32>(); }"
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> {:ok, pipeline} = ExDawn.Pipeline.create_render_pipeline(device, vertex_shader: shader, fragment_shader: shader)
       iex> is_reference(pipeline)
       true
@@ -37,12 +39,13 @@ defmodule ExDawn.Pipeline do
   """
   @spec create_render_pipeline(device(), keyword()) :: {:ok, pipeline()} | {:error, term()}
   def create_render_pipeline(device, opts) when is_list(opts) do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 
   @doc """
   Creates a compute pipeline.
+
+  TODO: [2025-01-15] fire - Implement compute pipeline creation with WGSL compute shader compilation using Native NIF
 
   ## Parameters
 
@@ -59,8 +62,6 @@ defmodule ExDawn.Pipeline do
   """
   @spec create_compute_pipeline(device(), String.t()) :: {:ok, pipeline()} | {:error, term()}
   def create_compute_pipeline(device, compute_shader) when is_binary(compute_shader) do
-    # TODO: Implement with Native NIF
     {:error, :not_implemented}
   end
 end
-

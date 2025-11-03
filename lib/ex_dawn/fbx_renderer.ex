@@ -19,6 +19,8 @@ defmodule ExDawn.FbxRenderer do
   @doc """
   Loads an FBX model for rendering.
 
+  TODO: [2025-01-15] fire - Convert FBX meshes to WebGPU buffers, load textures from FBX scene, and create materials and pipelines
+
   ## Parameters
 
   - `device`: The WebGPU device
@@ -26,7 +28,7 @@ defmodule ExDawn.FbxRenderer do
 
   ## Examples
 
-      iex> {:ok, device} = ExDawn.Device.create_instance() |> ExDawn.Device.create_adapter() |> ExDawn.Device.create_device()
+      iex> {:ok, device} = ExDawn.Device.create()
       iex> {:ok, document} = AriaFbx.Import.from_file("model.fbx")
       iex> {:ok, model} = ExDawn.FbxRenderer.load(device, document)
       iex> is_map(model)
@@ -35,14 +37,13 @@ defmodule ExDawn.FbxRenderer do
   """
   @spec load(device(), Document.t()) :: {:ok, map()} | {:error, term()}
   def load(device, %Document{} = document) do
-    # TODO: Convert FBX meshes to WebGPU buffers
-    # TODO: Load textures from FBX scene
-    # TODO: Create materials and pipelines
     {:ok, %{meshes: [], textures: [], materials: []}}
   end
 
   @doc """
   Renders a loaded FBX model.
+
+  TODO: [2025-01-15] fire - Begin render pass, traverse FBX scene graph with node transforms, draw each mesh with proper materials, and end render pass
 
   ## Parameters
 
@@ -62,15 +63,13 @@ defmodule ExDawn.FbxRenderer do
   """
   @spec render(device(), map(), Matrix4.t(), Matrix4.t()) :: :ok | {:error, term()}
   def render(device, model, view_matrix, proj_matrix) do
-    # TODO: Begin render pass
-    # TODO: Traverse FBX scene graph with node transforms
-    # TODO: Draw each mesh with proper materials
-    # TODO: End render pass
     :ok
   end
 
   @doc """
   Converts an FBX mesh to WebGPU vertex and index buffers.
+
+  TODO: [2025-01-15] fire - Extract vertex data and indices from FBX mesh and create vertex and index buffers
 
   ## Parameters
 
@@ -88,14 +87,13 @@ defmodule ExDawn.FbxRenderer do
   """
   @spec mesh_to_buffers(device(), Scene.Mesh.t()) :: {:ok, map()} | {:error, term()}
   def mesh_to_buffers(device, %Scene.Mesh{} = mesh) do
-    # TODO: Extract vertex data from FBX mesh
-    # TODO: Extract indices from FBX mesh
-    # TODO: Create vertex and index buffers
     {:ok, %{vertex_buffers: [], index_buffers: []}}
   end
 
   @doc """
   Sets up materials from FBX for rendering.
+
+  TODO: [2025-01-15] fire - Load textures from FBX material, create render pipeline with material shader, and set up uniform buffers for material properties
 
   ## Parameters
 
@@ -114,10 +112,6 @@ defmodule ExDawn.FbxRenderer do
   @spec setup_material(device(), Document.t(), Scene.Material.t()) ::
           {:ok, Pipeline.pipeline()} | {:error, term()}
   def setup_material(device, %Document{} = document, %Scene.Material{} = material) do
-    # TODO: Load textures from FBX material
-    # TODO: Create render pipeline with material shader
-    # TODO: Set up uniform buffers for material properties
     {:error, :not_implemented}
   end
 end
-
