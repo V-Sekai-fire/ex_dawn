@@ -1,0 +1,26 @@
+# Build artifacts
+/_build/
+/deps/
+*.beam
+*.o
+*.so
+*.dylib
+erl_crash.dump
+*.ez
+
+# C++ build artifacts
+c_build/
+priv/*.so
+priv/*.dylib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
